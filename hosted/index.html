@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Can I Binge It?</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+  <script src="bundle.js"></script>
+  <style>
+    #main {
+      float: left;
+      width: 100%;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+    
+    #content {
+      float: right;
+      width: 60%;
+      background-color: coral;
+    }
+    
+    #sidebar {
+      float: right;
+      width: 40%;
+      background-color: aqua;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <div id="sidebar">
+      <aside>
+        <h2>Other Users' Binges</h2>
+        <div id="postContainer">
+          <div class="postedContent">
+            <h4>UserName Here</h4>
+            <p>Title of binge</p>
+            <p>Length of Binge in hours</p>
+          </div>
+          <div class="postedContent">
+            <h4>UserName Here</h4>
+            <p>Title of binge</p>
+            <p>Length of Binge in hours</p>
+          </div>
+          <div class="postedContent">
+            <h4>UserName Here</h4>
+            <p>Title of binge</p>
+            <p>Length of Binge in hours</p>
+          </div>
+          <div class="postedContent">
+            <h4>UserName Here</h4>
+            <p>Title of binge</p>
+            <p>Length of Binge in hours</p>
+          </div>
+          <div class="postedContent">
+            <h4>UserName Here</h4>
+            <p>Title of binge</p>
+            <p>Length of Binge in hours</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div id="content">
+      <section>
+        <div id="titleArea">
+          <h1>DID-YOU-BINGE-IT?</h1>
+          <h3>For Adventurous Viewers</h3>
+        </div>
+        <div id="nav">
+          <p>Navigation goes here</p>
+        </div>
+        <article>
+          <h1>Should you Binge this? <span id="difficulty">Bingeability Rating</span></h1>
+          <h4>Title of Binge List</h4>
+          <p>Total length of Binge in Hours</p>
+        </article>
+        <article>
+          <form id="submissionForm" action="/sendList" method="post">
+            <label for="listTitle">List Name: </label>
+            <input id="listField" type="text" name="listTitle" />
+            <label for="name">Name: </label>
+            <input id="nameField" type="text" name="name" />
+            <input type="submit" value="Submit Form" />
+          </form>
+          <h6>Finished it?</h6>
+        </article>
+        <div id="footer">
+          <p>By James Taggart | For IGME 430 | 2017 | Using the MovieDB API</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</body>
+
+</html>
