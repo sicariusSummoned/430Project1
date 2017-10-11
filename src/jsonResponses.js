@@ -29,10 +29,6 @@ const getPosts = (request, response) => {
   console.log('Get request got to getPosts');
 
 
-  const responseJSON = {
-    posts,
-  };
-
   if (request.headers['if-none-match'] === digest) {
     return respondJSONMeta(request, response, 304);
   }
