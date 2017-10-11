@@ -5,27 +5,8 @@
   <title>Can I Binge It?</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script src="bundle.js"></script>
-  <style>
-    #main {
-      float: left;
-      width: 100%;
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-    
-    #content {
-      float: right;
-      width: 60%;
-      background-color: coral;
-    }
-    
-    #sidebar {
-      float: right;
-      width: 40%;
-      background-color: aqua;
-    }
-
-  </style>
+  <link rel="stylesheet" type="text/css" href = "/style.css">
+ 
 </head>
 
 <body>
@@ -34,26 +15,6 @@
       <aside>
         <h2>Other Users' Binges</h2>
         <div id="postContainer">
-          <div class="postedContent">
-            <h4>UserName Here</h4>
-            <p>Title of binge</p>
-            <p>Length of Binge in hours</p>
-          </div>
-          <div class="postedContent">
-            <h4>UserName Here</h4>
-            <p>Title of binge</p>
-            <p>Length of Binge in hours</p>
-          </div>
-          <div class="postedContent">
-            <h4>UserName Here</h4>
-            <p>Title of binge</p>
-            <p>Length of Binge in hours</p>
-          </div>
-          <div class="postedContent">
-            <h4>UserName Here</h4>
-            <p>Title of binge</p>
-            <p>Length of Binge in hours</p>
-          </div>
           <div class="postedContent">
             <h4>UserName Here</h4>
             <p>Title of binge</p>
@@ -78,11 +39,15 @@
           <p>Total length of Binge in Hours</p>
         </article>
         <article>
-          <form id="submissionForm" action="/sendList" method="post">
+          <form id="submissionForm" action="/addPost" method="post">
             <label for="listTitle">List Name: </label>
-            <input id="listField" type="text" name="listTitle" />
+            <input id="titleField" type="text" name="listTitle" />
             <label for="name">Name: </label>
             <input id="nameField" type="text" name="name" />
+            <label for="marathonInfo">List Details: </label>
+            <input id="detailsField" type="text" name="marathonInfo"/>
+            <label for="marathonRuntime">Total Runtime(minutes): </label>
+            <input id="timeField" type = "number" name="marathonRuntime" min="0" step="1"/>
             <input type="submit" value="Submit Form" />
           </form>
           <h6>Finished it?</h6>

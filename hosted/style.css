@@ -1,0 +1,30 @@
+html,
+body {
+  height:100%;
+  width:100%;
+  margin:0;
+  padding:0;
+}
+
+#main {
+  float: left;
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: 100%;
+}
+
+#content {
+  float: right;
+  width: 60%;
+  background-color: coral;
+  height: inherit;
+}
+
+#sidebar {
+  float: right;
+  width: 40%;
+  background-color: aqua;
+  overflow-y: scroll;
+  height: inherit;
+}

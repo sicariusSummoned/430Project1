@@ -13,17 +13,14 @@ const handleResponse = (xhr, parseResponse, responseType) => {
 
       if (type === 'application/json') {
         let obj = JSON.parse(xhr.response);
-
       }
       //For populating the sidebar.
     } else if (responseType === 'getPosts') {
       console.log('ResponseType is getPosts');
       if (type === 'application/json') {
         let body = JSON.parse(xhr.response);
-        console.log('body:')
+        console.log('body:');
         console.dir(body);
-
-
 
         const postContent = document.createElement('div');
         postContent.className = "postedContent";
@@ -58,12 +55,10 @@ const sendMarathon = (e, submissionForm) => {
 
   xhr.open(method, action);
 
-
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.setRequestHeader('Accept', 'application/json');
 
   xhr.onload = () => handleResponse(xhr, true, 'getPosts');
-
 
   const formInfo = `title=${title}&name=${name}&details=${details}&runtime=${runtime}`;
 
@@ -72,7 +67,7 @@ const sendMarathon = (e, submissionForm) => {
   return false;
 };
 
-requestPosts = (e) => {
+requestPosts = e => {
   const action = '/getPosts';
   const method = 'get';
 
@@ -94,13 +89,12 @@ requestPosts = (e) => {
 
 const init = () => {
   const submissionForm = document.querySelector('#submissionForm');
-  const getPosts = (e) => requestPosts(e);
-  const sendPost = (e) => sendMarathon(e, submissionForm);
+  const getPosts = e => requestPosts(e);
+  const sendPost = e => sendMarathon(e, submissionForm);
 
   submissionForm.addEventListener('submit', sendPost);
   //submissionForm.addEventListener('submit', getPosts);
 
-
-}
+};
 
 window.onload = init;
