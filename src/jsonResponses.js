@@ -1,4 +1,8 @@
+let myKey = '9a0d8b4145c3e4ec3a2212c9335dc57f'
+
 const crypto = require('crypto');
+
+const mdb = require('moviedb')(myKey);
 
 const posts = {};
 
@@ -26,8 +30,6 @@ const respondJSONMeta = (request, response, status) => {
 };
 
 const getPosts = (request, response) => {
-  console.log('Get request got to getPosts');
-
 
   if (request.headers['if-none-match'] === digest) {
     return respondJSONMeta(request, response, 304);
@@ -35,31 +37,30 @@ const getPosts = (request, response) => {
 
   etag = crypto.createHash('sha1').update(JSON.stringify(posts));
 
-  
-  
   return respondJSON(request, response, 200, posts);
 };
 
 
 const addPost = (request, response, body) => {
-  console.log('Arrived at addPost');
-
-  const responseJSON = {
-    posts,
-  };
+  let updated = false;
 
   if (!body.title || !body.name || !body.details || !body.runtime) {
     console.log('Parameters missing');
   } else {
+    if (posts[body.title]) {
+      updated = true;
+    }
     posts[body.title] = body;
-    responseJSON.posts = posts;
   }
 
   etag = crypto.createHash('sha1').update(JSON.stringify(posts));
   digest = etag.digest('hex');
-
   console.dir(posts[body.title]);
-  return respondJSON(request, response, 200, posts[body.title]);
+
+  if (updated) {
+    return respondJSONMeta(request, response, 204)
+  }
+  return respondJSONMeta(request, response, 201);
 };
 
 const notFound = (request, response) => {
@@ -79,6 +80,31 @@ const notFound = (request, response) => {
 
 const notFoundMeta = (request, response) => respondJSONMeta(request, response, 304);
 
+const search = (request, response, searchQuery) => {
+
+  if (!searchQuery.query) {
+    console.log('missing params for search');
+  } else {
+    console.dir(searchQuery.query);
+    console.log(searchQuery.query);
+
+    let results = {};
+    mdb.searchMovie({
+      query: searchQuery.query
+    }, (err, res) => {
+      results = res;
+    });
+
+    etag = crypto.createHash('sha1').update(JSON.stringify(posts));
+    digest = etag.digest('hex');
+
+    return respondJSON(request, response, 200, results);
+  }
+
+
+
+};
+
 module.exports = {
   respondJSON,
   respondJSONMeta,
@@ -86,4 +112,5 @@ module.exports = {
   addPost,
   notFound,
   notFoundMeta,
+  search,
 };

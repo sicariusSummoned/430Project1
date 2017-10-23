@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-  <title>Can I Binge It?</title>
+  <title>Can I Marathon It?</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script src="bundle.js"></script>
-  <link rel="stylesheet" type="text/css" href = "/style.css">
- 
+  <link rel="stylesheet" type="text/css" href="/style.css">
+
 </head>
 
 <body>
@@ -15,11 +15,6 @@
       <aside>
         <h2>Other Users' Binges</h2>
         <div id="postContainer">
-          <div class="postedContent">
-            <h4>UserName Here</h4>
-            <p>Title of binge</p>
-            <p>Length of Binge in hours</p>
-          </div>
         </div>
       </aside>
     </div>
@@ -27,38 +22,49 @@
     <div id="content">
       <section>
         <div id="titleArea">
-          <h1>DID-YOU-BINGE-IT?</h1>
-          <h3>For Adventurous Viewers</h3>
+          <h1>Post your marathon!</h1>
         </div>
-        <div id="nav">
-          <p>Navigation goes here</p>
-        </div>
-        <article>
-          <h1>Should you Binge this? <span id="difficulty">Bingeability Rating</span></h1>
-          <h4>Title of Binge List</h4>
-          <p>Total length of Binge in Hours</p>
-        </article>
         <article>
           <form id="submissionForm" action="/addPost" method="post">
-            <label for="listTitle">List Name: </label>
-            <input id="titleField" type="text" name="listTitle" />
-            <label for="name">Name: </label>
-            <input id="nameField" type="text" name="name" />
-            <label for="marathonInfo">List Details: </label>
-            <input id="detailsField" type="text" name="marathonInfo"/>
-            <label for="marathonRuntime">Total Runtime(minutes): </label>
-            <input id="timeField" type = "number" name="marathonRuntime" min="0" step="1"/>
+            <div><label for="listTitle">Marathon Title:</label>
+              <input class="inputText"  id="titleField" type="text" name="listTitle" /></div>
+            <div><label for="name">Name: </label>
+              <input class="inputText" id="nameField" type="text" name="name" /></div>
+            <div><label for="marathonInfo">List Details: </label>
+              <input class="inputText" id="detailsField" type="text" name="marathonInfo" /></div>
+            <div><label for="marathonRuntime">Total Runtime (minutes): </label>
+              <input class="inputText" id="timeField" type="number" name="marathonRuntime" min="0" step="1" /></div>
             <input type="submit" value="Submit Form" />
           </form>
-          <h6>Finished it?</h6>
         </article>
-        <div id="footer">
-          <p>By James Taggart | For IGME 430 | 2017 | Using the MovieDB API</p>
-        </div>
+
       </section>
     </div>
-  </div>
 
+    <div id="search">
+      <section>
+        <div id="titleArea">
+          <h1>Search for movies!</h1>
+        </div>
+        <article>
+          <form id="searchForm" action="/search" method="get">
+            <label for="searchBar">Search:</label>
+            <input id="searchField" type="text" name="searchBar" />
+            <input type="submit" value="Search" />
+          </form>
+        </article>
+        <div>
+          <h2>Results</h2>
+          <div id="searchResultsContainer">
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <div id="footer">
+    <p>By James Taggart | For IGME 430 | 2017 | Using the MovieDB API</p>
+  </div>
 </body>
 
 </html>

@@ -3,13 +3,13 @@ const handleResponse = (xhr, parseResponse, responseType) => {
   const postContainer = document.querySelector('#postContainer');
   const type = xhr.getResponseHeader('content-type');
 
+  console.log(`Status code from server: ${xhr.status}`);
+  
   if (parseResponse) {
-    console.log('Parse response is true');
-
     //For searching movies/ clients? 
     //Still need to decide on this one.
     if (responseType === 'search') {
-      console.log('responseType is search');
+      console.log('search');
 
       if (type === 'application/json') {
         let obj = JSON.parse(xhr.response);
@@ -17,30 +17,36 @@ const handleResponse = (xhr, parseResponse, responseType) => {
       }
       //For populating the sidebar.
     } else if (responseType === 'getPosts') {
-      console.log('ResponseType is getPosts');
+      console.log('getPosts')
       if (type === 'application/json') {
+        postContainer.innerHTML = "";
+
         let body = JSON.parse(xhr.response);
-        console.log('body:')
-        console.dir(body);
 
+        let keys = Object.keys(body);
 
+        for (let i = 0; i < keys.length; i++) {
+          let post = body[keys[i]];
 
-        const postContent = document.createElement('div');
-        postContent.className = "postedContent";
+          if (post.name && post.title && post.runtime) {
+            const postContent = document.createElement('div');
+            postContent.className = "postedContent";
 
-        let userName = document.createElement('h4');
-        let marathonTitle = document.createElement('p');
-        let marathonLength = document.createElement('p');
+            let userName = document.createElement('h4');
+            let marathonTitle = document.createElement('p');
+            let marathonLength = document.createElement('p');
 
-        userName.innerHTML = body.name;
-        marathonTitle.innerHTML = body.title;
-        marathonLength.innerHTML = body.runtime;
+            userName.innerHTML = post.name;
+            marathonTitle.innerHTML = post.title;
+            marathonLength.innerHTML = post.runtime;
 
-        postContent.appendChild(userName);
-        postContent.appendChild(marathonTitle);
-        postContent.appendChild(marathonLength);
+            postContent.appendChild(userName);
+            postContent.appendChild(marathonTitle);
+            postContent.appendChild(marathonLength);
 
-        postContainer.appendChild(postContent);
+            postContainer.appendChild(postContent);
+          }
+        }
       }
     }
   }
@@ -62,7 +68,7 @@ const sendMarathon = (e, submissionForm) => {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.setRequestHeader('Accept', 'application/json');
 
-  xhr.onload = () => handleResponse(xhr, true, 'getPosts');
+  xhr.onload = () => handleResponse(xhr, true, 'addPost');
 
 
   const formInfo = `title=${title}&name=${name}&details=${details}&runtime=${runtime}`;
@@ -72,7 +78,7 @@ const sendMarathon = (e, submissionForm) => {
   return false;
 };
 
-requestPosts = (e) => {
+const requestPosts = (e) => {
   const action = '/getPosts';
   const method = 'get';
 
@@ -88,18 +94,44 @@ requestPosts = (e) => {
   }
 
   xhr.send();
+  //e.preventDefault();
+  return false;
+};
+
+const searchMovies = (e, searchForm) =>{
+  console.log('searching clientside');
+  
+  const action = searchForm.getAttribute('action');
+  const method = searchForm.getAttribute('method');
+  const query = document.querySelector('#searchField').value;
+  
+  const xhr = new XMLHttpRequest();
+  xhr.open(method, action);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.setRequestHeader('Accept', 'application/json');
+  
+  xhr.onload = () => handleResponse(xhr, true, 'search');
+  
+  const searchInfo = `query=${query}`;
+  
+  console.log(searchInfo);
+  
+  xhr.send(searchInfo);
   e.preventDefault();
   return false;
 };
 
 const init = () => {
   const submissionForm = document.querySelector('#submissionForm');
+  const searchForm = document.querySelector('#searchForm');
   const getPosts = (e) => requestPosts(e);
   const sendPost = (e) => sendMarathon(e, submissionForm);
-
+  const sendSearch = (e) => searchMovies(e, searchForm);
+  
   submissionForm.addEventListener('submit', sendPost);
-  //submissionForm.addEventListener('submit', getPosts);
-
+  searchForm.addEventListener('submit', sendSearch);
+  
+  setInterval(getPosts, 3000);
 
 }
 

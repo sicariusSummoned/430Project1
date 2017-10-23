@@ -8,49 +8,64 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
-  if (request.method === 'GET') {
-    // NEEDS TO RETURN POSTS
-    switch (parsedUrl.pathname) {
-      case '/':
-        htmlHandler.getIndex(request, response);
-        break;
-      case '/style.css':
-        htmlHandler.getCSS(request, response);
-        break;
-      case '/bundle.js':
-        htmlHandler.getBundle(request, response);
-        break;
-      case '/getPosts':
-        jsonHandler.getPosts(request, response);
-        break;
-      default:
-        jsonHandler.notFound(request, response);
-        break;
-    }
-  } else if (request.method === 'HEAD') {
-    switch (parsedUrl.pathname) {
-      default:
-        jsonHandler.notFound(request, response);
-        break;
-    }
-  } else if (request.method === 'POST') {
-    const res = response;
 
-    const body = [];
 
-    request.on('error', (err) => {
-      console.dir(err);
-      res.statusCode = 400;
-      res.end();
-    });
+  const res = response;
+  const body = [];
 
-    request.on('data', (chunk) => {
-      body.push(chunk);
-    });
+  request.on('error', (err) => {
+    console.dir(err);
+    res.statusCode = 400;
+    res.end();
+  });
 
-    request.on('end', () => {
-      const bodyString = Buffer.concat(body).toString();
-      const bodyParams = query.parse(bodyString);
+  request.on('data', (chunk) => {
+    body.push(chunk);
+  });
+
+  request.on('end', () => {
+    const bodyString = Buffer.concat(body).toString();
+    const bodyParams = query.parse(bodyString);
+
+
+    if (request.method === 'GET') {
+      // NEEDS TO RETURN POSTS
+      switch (parsedUrl.pathname) {
+        case '/':
+          htmlHandler.getIndex(request, response);
+          break;
+        case '/style.css':
+          htmlHandler.getCSS(request, response);
+          break;
+        case '/bundle.js':
+          htmlHandler.getBundle(request, response);
+          break;
+        case '/getPosts':
+          jsonHandler.getPosts(request, response);
+          break;
+        case '/search':
+          console.log(bodyString);
+          console.dir(bodyParams);
+          jsonHandler.search(request, response, bodyParams);
+        default:
+          jsonHandler.notFound(request, response);
+          break;
+      }
+    } else if (request.method === 'HEAD') {
+
+
+      switch (parsedUrl.pathname) {
+        case '/search':
+          jsonHandler.searchMeta(request, response);
+          break;
+        default:
+          jsonHandler.notFound(request, response);
+          break;
+      }
+
+
+
+    } else if (request.method === 'POST') {
 
       // NEEDS TO POST NEW INFO
       switch (parsedUrl.pathname) {
@@ -60,11 +75,12 @@ const onRequest = (request, response) => {
         default:
           jsonHandler.notFound(request, res);
       }
-    });
-  } else {
-    // ERROR send 404
-    jsonHandler.notFound(request, response);
-  }
+
+    } else {
+      // ERROR send 404
+      jsonHandler.notFound(request, response);
+    }
+  });
 };
 
 http.createServer(onRequest).listen(port);

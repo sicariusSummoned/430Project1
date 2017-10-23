@@ -1,9 +1,20 @@
 html,
 body {
-  height:100%;
-  width:100%;
-  margin:0;
-  padding:0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  float: left;
+}
+
+#submissionForm{
+  
+}
+
+.inputText {
 }
 
 #main {
@@ -11,20 +22,31 @@ body {
   width: 100%;
   margin-top: 0px;
   margin-bottom: 0px;
-  height: 100%;
+  height: 90%;
 }
 
 #content {
   float: right;
-  width: 60%;
+  width: 25%;
   background-color: coral;
+  height: inherit;
+}
+
+#search {
+  float: right;
+  width: 25%;
+  background-color: aquamarine;
   height: inherit;
 }
 
 #sidebar {
   float: right;
-  width: 40%;
+  width: 50%;
   background-color: aqua;
   overflow-y: scroll;
   height: inherit;
+}
+
+#footer {
+  height: 10%;
 }
