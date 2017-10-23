@@ -82,15 +82,15 @@ const notFoundMeta = (request, response) => respondJSONMeta(request, response, 3
 
 const search = (request, response, searchQuery) => {
 
-  
-  
+  let results = {};
+
+
   if (!searchQuery.query) {
     console.log('missing params for search');
   } else {
     console.log('searchQuery.query:')
     console.dir(searchQuery.query);
 
-    let results = {};
     mdb.searchMovie({
       query: searchQuery.query
     }, (err, res) => {
@@ -100,14 +100,14 @@ const search = (request, response, searchQuery) => {
     etag = crypto.createHash('sha1').update(JSON.stringify(posts));
     digest = etag.digest('hex');
 
-    
+
     console.log('results from MovieDB:');
     console.dir(results);
-    
-    return respondJSON(request, response, 200, results);
+
+
   }
 
-
+  return respondJSON(request, response, 200, results);
 
 };
 

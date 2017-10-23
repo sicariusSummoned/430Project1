@@ -49,6 +49,7 @@ const onRequest = (request, response) => {
           console.log('Search bodyParams:');
           console.dir(bodyParams);
           jsonHandler.search(request, response, bodyParams);
+          break;
         default:
           jsonHandler.notFound(request, response);
           break;
