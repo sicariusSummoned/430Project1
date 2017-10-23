@@ -104,6 +104,7 @@ const handleResponse = (xhr, parseResponse, responseType) => {
   }
 };
 
+//Sends a new marathon post to the server
 const sendMarathon = (e, submissionForm) => {
   const action = submissionForm.getAttribute('action');
   const method = submissionForm.getAttribute('method');
@@ -130,6 +131,7 @@ const sendMarathon = (e, submissionForm) => {
   return false;
 };
 
+//Get all new posts from server
 const requestPosts = () => {
   const action = '/getPosts';
   const method = 'get';
@@ -148,7 +150,8 @@ const requestPosts = () => {
   xhr.send();
 };
 
-
+//Do we need to get any new posts?
+//Has the server updated?
 const checkPosts = () => {
 
   const action = '/checkPosts';
@@ -168,6 +171,8 @@ const checkPosts = () => {
   xhr.send();
 }
 
+
+//Query API for movies by query
 const searchMovies = (e, searchForm) => {
   console.log('searching clientside');
   const method = searchForm.getAttribute('method');

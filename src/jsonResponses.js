@@ -1,8 +1,8 @@
 const myKey = '9a0d8b4145c3e4ec3a2212c9335dc57f';
+const mdb = require('moviedb')(myKey);
 
 const crypto = require('crypto');
 
-const mdb = require('moviedb')(myKey);
 
 const posts = {};
 
@@ -29,6 +29,7 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
+//Return posts object to client
 const getPosts = (request, response) => {
   if (request.headers['if-none-match'] === digest) {
     return respondJSONMeta(request, response, 304);
@@ -39,9 +40,10 @@ const getPosts = (request, response) => {
   return respondJSON(request, response, 200, posts);
 };
 
-
+//Header version
 const getPostsMeta = (request, response) => respondJSONMeta(request, response, 200);
 
+//Put a new post into the server object
 const addPost = (request, response, body) => {
   let updated = false;
 
@@ -64,6 +66,7 @@ const addPost = (request, response, body) => {
   return respondJSONMeta(request, response, 201);
 };
 
+//Simple 404
 const notFound = (request, response) => {
   const responseJSON = {
     posts,
@@ -81,6 +84,8 @@ const notFound = (request, response) => {
 
 const notFoundMeta = (request, response) => respondJSONMeta(request, response, 304);
 
+
+//Search the movieDB
 const search = (request, response, searchQuery) => {
   if (!searchQuery.query) {
     console.log('missing params for search');
