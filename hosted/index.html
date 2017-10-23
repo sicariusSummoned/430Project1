@@ -12,22 +12,22 @@
 <body>
   <div id="main">
     <div id="sidebar">
-      <aside>
-        <h2>Other Users' Binges</h2>
-        <div id="postContainer">
-        </div>
-      </aside>
+      <div class="titleArea">
+        <h1>Other Users' Marathons</h1>
+      </div>
+      <div id="postContainer">
+      </div>
     </div>
 
     <div id="content">
       <section>
-        <div id="titleArea">
+        <div class="titleArea">
           <h1>Post your marathon!</h1>
         </div>
         <article>
           <form id="submissionForm" action="/addPost" method="post">
             <div><label for="listTitle">Marathon Title:</label>
-              <input class="inputText"  id="titleField" type="text" name="listTitle" /></div>
+              <input class="inputText" id="titleField" type="text" name="listTitle" /></div>
             <div><label for="name">Name: </label>
               <input class="inputText" id="nameField" type="text" name="name" /></div>
             <div><label for="marathonInfo">List Details: </label>
@@ -43,7 +43,7 @@
 
     <div id="search">
       <section>
-        <div id="titleArea">
+        <div class="titleArea">
           <h1>Search for movies!</h1>
         </div>
         <article>
@@ -61,10 +61,11 @@
       </section>
 
     </div>
+    <div id="footer">
+      <p>By James Taggart | For IGME 430 | 2017 | Using the MovieDB API</p>
+    </div>
   </div>
-  <div id="footer">
-    <p>By James Taggart | For IGME 430 | 2017 | Using the MovieDB API</p>
-  </div>
+
 </body>
 
 </html>

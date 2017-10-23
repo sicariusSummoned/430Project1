@@ -44,7 +44,9 @@ const onRequest = (request, response) => {
           jsonHandler.getPosts(request, response);
           break;
         case '/search':
+          console.log('Search bodystring:');
           console.log(bodyString);
+          console.log('Search bodyParams:');
           console.dir(bodyParams);
           jsonHandler.search(request, response, bodyParams);
         default:
@@ -52,8 +54,6 @@ const onRequest = (request, response) => {
           break;
       }
     } else if (request.method === 'HEAD') {
-
-
       switch (parsedUrl.pathname) {
         case '/search':
           jsonHandler.searchMeta(request, response);
@@ -62,9 +62,6 @@ const onRequest = (request, response) => {
           jsonHandler.notFound(request, response);
           break;
       }
-
-
-
     } else if (request.method === 'POST') {
 
       // NEEDS TO POST NEW INFO

@@ -97,7 +97,6 @@ const requestPosts = e => {
 
 const searchMovies = (e, searchForm) => {
   console.log('searching clientside');
-
   const action = searchForm.getAttribute('action');
   const method = searchForm.getAttribute('method');
   const query = document.querySelector('#searchField').value;
@@ -111,6 +110,7 @@ const searchMovies = (e, searchForm) => {
 
   const searchInfo = `query=${query}`;
 
+  console.log('Search Info:');
   console.log(searchInfo);
 
   xhr.send(searchInfo);

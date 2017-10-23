@@ -4,25 +4,41 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  background-color: indianred;
+
 }
 
 label {
   float: left;
 }
 
-#submissionForm{
-  
+.titleArea {
+  font-size: 24pt;
+  text-align: center;
 }
 
-.inputText {
+#submissionForm {}
+
+.inputText {}
+
+#postContainer {
+  height: inherit;
+  overflow-y: scroll;
+}
+
+.postedContent {
+  padding: 20px;
+  margin: 10px;
+  border: black solid 1px;
 }
 
 #main {
   float: left;
+  height: 98.5%;
   width: 100%;
   margin-top: 0px;
-  margin-bottom: 0px;
-  height: 90%;
+  margin-bottom: -10px;
 }
 
 #content {
@@ -33,6 +49,7 @@ label {
 }
 
 #search {
+
   float: right;
   width: 25%;
   background-color: aquamarine;
@@ -40,13 +57,16 @@ label {
 }
 
 #sidebar {
+
   float: right;
   width: 50%;
   background-color: aqua;
-  overflow-y: scroll;
   height: inherit;
 }
 
 #footer {
-  height: 10%;
+  width: 100%;
+  text-align: center;
+  font-size: 18pt;
+  margin-bottom:5px;
 }
