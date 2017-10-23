@@ -26,15 +26,15 @@
         </div>
         <article>
           <form id="submissionForm" action="/addPost" method="post">
-            <div><label for="listTitle">Marathon Title:</label>
+            <div id="title"><label for="listTitle">Marathon Title:</label>
               <input class="inputText" id="titleField" type="text" name="listTitle" /></div>
-            <div><label for="name">Name: </label>
+            <div id="name"><label for="name">Name: </label>
               <input class="inputText" id="nameField" type="text" name="name" /></div>
-            <div><label for="marathonInfo">List Details: </label>
+            <div id="info"><label for="marathonInfo">List Details: </label>
               <input class="inputText" id="detailsField" type="text" name="marathonInfo" /></div>
-            <div><label for="marathonRuntime">Total Runtime (minutes): </label>
+            <div id="runtime"><label for="marathonRuntime">Total Runtime (minutes): </label>
               <input class="inputText" id="timeField" type="number" name="marathonRuntime" min="0" step="1" /></div>
-            <input type="submit" value="Submit Form" />
+            <input class="button" type="submit" value="Post Your Marathon" />
           </form>
         </article>
 
@@ -42,23 +42,17 @@
     </div>
 
     <div id="search">
-      <section>
-        <div class="titleArea">
-          <h1>Search for movies!</h1>
-        </div>
-        <article>
-          <form id="searchForm" action="/search" method="get">
-            <label for="searchBar">Search:</label>
-            <input id="searchField" type="text" name="searchBar" />
-            <input type="submit" value="Search" />
-          </form>
-        </article>
-        <div>
-          <h2>Results</h2>
-          <div id="searchResultsContainer">
-          </div>
-        </div>
-      </section>
+      <div class="titleArea">
+        <h1>Search for movies!</h1>
+      </div>
+      <form id="searchForm" action="/search" method="get">
+        <label for="searchBar">Search:</label>
+        <input id="searchField" type="text" name="searchBar" />
+        <input class="button" type="submit" value="Search" />
+      </form>
+      <h2>Results</h2>
+      <div id="searchContainer">
+      </div>
 
     </div>
     <div id="footer">

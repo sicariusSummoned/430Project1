@@ -1,4 +1,4 @@
-let myKey = '9a0d8b4145c3e4ec3a2212c9335dc57f'
+const myKey = '9a0d8b4145c3e4ec3a2212c9335dc57f';
 
 const crypto = require('crypto');
 
@@ -30,7 +30,6 @@ const respondJSONMeta = (request, response, status) => {
 };
 
 const getPosts = (request, response) => {
-
   if (request.headers['if-none-match'] === digest) {
     return respondJSONMeta(request, response, 304);
   }
@@ -40,6 +39,8 @@ const getPosts = (request, response) => {
   return respondJSON(request, response, 200, posts);
 };
 
+
+const getPostsMeta = (request, response) => respondJSONMeta(request, response, 200);
 
 const addPost = (request, response, body) => {
   let updated = false;
@@ -58,7 +59,7 @@ const addPost = (request, response, body) => {
   console.dir(posts[body.title]);
 
   if (updated) {
-    return respondJSONMeta(request, response, 204)
+    return respondJSONMeta(request, response, 204);
   }
   return respondJSONMeta(request, response, 201);
 };
@@ -81,40 +82,29 @@ const notFound = (request, response) => {
 const notFoundMeta = (request, response) => respondJSONMeta(request, response, 304);
 
 const search = (request, response, searchQuery) => {
-
-  let results = {};
-
-
   if (!searchQuery.query) {
     console.log('missing params for search');
   } else {
-    console.log('searchQuery.query:')
+    console.log('searchQuery.query:');
     console.dir(searchQuery.query);
 
     mdb.searchMovie({
-      query: searchQuery.query
+      query: searchQuery.query,
     }, (err, res) => {
-      results = res;
+      etag = crypto.createHash('sha1').update(JSON.stringify(posts));
+      digest = etag.digest('hex');
+
+
+      return respondJSON(request, response, 200, res.results);
     });
-
-    etag = crypto.createHash('sha1').update(JSON.stringify(posts));
-    digest = etag.digest('hex');
-
-
-    console.log('results from MovieDB:');
-    console.dir(results);
-
-
   }
-
-  return respondJSON(request, response, 200, results);
-
 };
 
 module.exports = {
   respondJSON,
   respondJSONMeta,
   getPosts,
+  getPostsMeta,
   addPost,
   notFound,
   notFoundMeta,

@@ -8,6 +8,7 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
+  const searchVar = query.parse(parsedUrl.query);
 
 
   const res = response;
@@ -44,11 +45,10 @@ const onRequest = (request, response) => {
           jsonHandler.getPosts(request, response);
           break;
         case '/search':
-          console.log('Search bodystring:');
-          console.log(bodyString);
-          console.log('Search bodyParams:');
-          console.dir(bodyParams);
-          jsonHandler.search(request, response, bodyParams);
+
+          console.log('SearchVar:');
+          console.dir(searchVar);
+          jsonHandler.search(request, response, searchVar);
           break;
         default:
           jsonHandler.notFound(request, response);
@@ -56,6 +56,9 @@ const onRequest = (request, response) => {
       }
     } else if (request.method === 'HEAD') {
       switch (parsedUrl.pathname) {
+        case '/checkPosts':
+          jsonHandler.getPostsMeta(request, response);
+          break;
         case '/search':
           jsonHandler.searchMeta(request, response);
           break;
@@ -64,7 +67,6 @@ const onRequest = (request, response) => {
           break;
       }
     } else if (request.method === 'POST') {
-
       // NEEDS TO POST NEW INFO
       switch (parsedUrl.pathname) {
         case '/addPost':
@@ -73,7 +75,6 @@ const onRequest = (request, response) => {
         default:
           jsonHandler.notFound(request, res);
       }
-
     } else {
       // ERROR send 404
       jsonHandler.notFound(request, response);

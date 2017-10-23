@@ -5,7 +5,8 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: indianred;
+  background-color: #011638;
+  color: #CDCDCD;
 
 }
 
@@ -23,50 +24,119 @@ label {
 .inputText {}
 
 #postContainer {
-  height: inherit;
+  height: 83%;
   overflow-y: scroll;
 }
 
-.postedContent {
+.postedContent,
+.searchedContent {
   padding: 20px;
   margin: 10px;
   border: black solid 1px;
+  background-color: #214E34;
+  color: #DFF8EB;
+
 }
+
+.searchedContent > p {
+  font-style: italic;
+}
+
+.postedContent > p {
+  font-style: italic;
+}
+
+
+
+.searchedContent > h4 {
+  font-size: 18pt;
+}
+
+.postedContent > h4 {
+  font-size: 18pt;
+}
+
+.postedContent > h3 {
+  font-size: 12pt;
+  font-style: italic;
+}
+
+#searchContainer {
+  height: 66%;
+  overflow-y: scroll;
+}
+
+
 
 #main {
   float: left;
   height: 98.5%;
   width: 100%;
   margin-top: 0px;
-  margin-bottom: -10px;
+  margin-bottom: 0px;
 }
 
 #content {
   float: right;
-  width: 25%;
-  background-color: coral;
+  width: 50%;
+  background-color: #CDCDCD;
+  color: #364156;
   height: inherit;
+  text-align: center;
 }
 
 #search {
 
   float: right;
   width: 25%;
-  background-color: aquamarine;
+  background-color: #364156;
   height: inherit;
+  overflow: hidden;
 }
 
 #sidebar {
 
   float: right;
-  width: 50%;
-  background-color: aqua;
+  width: 25%;
+  background-color: #364156;
   height: inherit;
+  overflow: hidden;
 }
 
 #footer {
   width: 100%;
   text-align: center;
   font-size: 18pt;
-  margin-bottom:5px;
+  margin-bottom: 5px;
+}
+
+#submissionForm {
+  background-color: #DFF8EB;
+  padding: 30px;
+  margin: auto;
+  display: block;
+}
+
+#submissionForm > div {
+  margin-top: 10px;
+  font-size: 24pt;
+}
+
+#submissionForm > div > input {
+  padding-top: 20px;
+  font-size: 24pt;
+  margin-right: 0;
+}
+
+#submissionForm > input {
+  margin-top: 10px;
+  width: 250px;
+  height: 60px;
+
+  font-size: 14pt;
+}
+
+input {
+  margin: auto;
+
 }
